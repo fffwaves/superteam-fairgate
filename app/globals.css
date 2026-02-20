@@ -1,26 +1,52 @@
 @import "tailwindcss";
 
+@theme {
+  --color-background: #0a0a0f;
+  --color-foreground: #ffffff;
+}
+
 :root {
-  --background: #ffffff;
-  --foreground: #171717;
-}
-
-@theme inline {
-  --color-background: var(--background);
-  --color-foreground: var(--foreground);
-  --font-sans: var(--font-geist-sans);
-  --font-mono: var(--font-geist-mono);
-}
-
-@media (prefers-color-scheme: dark) {
-  :root {
-    --background: #0a0a0a;
-    --foreground: #ededed;
-  }
+  --background: #0a0a0f;
+  --foreground: #ffffff;
 }
 
 body {
   background: var(--background);
   color: var(--foreground);
-  font-family: Arial, Helvetica, sans-serif;
+}
+
+.glass-card {
+  background: rgba(255, 255, 255, 0.03);
+  backdrop-filter: blur(10px);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  border-radius: 1rem;
+}
+
+.gradient-text {
+  background: linear-gradient(to right, #a855f7, #6366f1);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
+
+.gradient-bg {
+  background: linear-gradient(to right, #a855f7, #6366f1);
+}
+
+.tier-glow-bronze { filter: drop-shadow(0 0 8px rgba(205, 127, 50, 0.4)); }
+.tier-glow-silver { filter: drop-shadow(0 0 8px rgba(192, 192, 192, 0.4)); }
+.tier-glow-gold { filter: drop-shadow(0 0 8px rgba(255, 215, 0, 0.4)); }
+.tier-glow-platinum { filter: drop-shadow(0 0 8px rgba(229, 228, 226, 0.4)); }
+
+/* Wallet Button Customization */
+.wallet-adapter-button-trigger {
+  background-color: #7c3aed !important;
+  border-radius: 0.5rem !important;
+  font-family: inherit !important;
+  font-weight: 600 !important;
+  transition: all 0.2s !important;
+}
+
+.wallet-adapter-button-trigger:hover {
+  background-color: #6d28d9 !important;
+  transform: translateY(-1px);
 }

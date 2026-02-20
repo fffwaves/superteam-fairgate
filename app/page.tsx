@@ -1,65 +1,99 @@
-import Image from "next/image";
+'use client';
 
-export default function Home() {
+import { useWallet } from '@solana/wallet-adapter-react';
+import { useRouter } from 'next/navigation';
+import { useEffect } from 'react';
+import { Navbar } from '@/components/Navbar';
+import { motion } from 'framer-motion';
+import { Shield, Lock, Award, Zap } from 'lucide-react';
+import dynamic from 'next/dynamic';
+
+const WalletMultiButtonDynamic = dynamic(
+    async () => (await import('@solana/wallet-adapter-react-ui')).WalletMultiButton,
+    { ssr: false }
+);
+
+export default function LandingPage() {
+  const { connected } = useWallet();
+  const router = useRouter();
+
+  useEffect(() => {
+    if (connected) {
+      router.push('/dashboard');
+    }
+  }, [connected, router]);
+
   return (
-    <div className="flex min-h-screen items-center justify-center bg-zinc-50 font-sans dark:bg-black">
-      <main className="flex min-h-screen w-full max-w-3xl flex-col items-center justify-between py-32 px-16 bg-white dark:bg-black sm:items-start">
-        <Image
-          className="dark:invert"
-          src="/next.svg"
-          alt="Next.js logo"
-          width={100}
-          height={20}
-          priority
-        />
-        <div className="flex flex-col items-center gap-6 text-center sm:items-start sm:text-left">
-          <h1 className="max-w-xs text-3xl font-semibold leading-10 tracking-tight text-black dark:text-zinc-50">
-            To get started, edit the page.tsx file.
-          </h1>
-          <p className="max-w-md text-lg leading-8 text-zinc-600 dark:text-zinc-400">
-            Looking for a starting point or more instructions? Head over to{" "}
-            <a
-              href="https://vercel.com/templates?framework=next.js&utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-              className="font-medium text-zinc-950 dark:text-zinc-50"
-            >
-              Templates
-            </a>{" "}
-            or the{" "}
-            <a
-              href="https://nextjs.org/learn?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-              className="font-medium text-zinc-950 dark:text-zinc-50"
-            >
-              Learning
-            </a>{" "}
-            center.
-          </p>
-        </div>
-        <div className="flex flex-col gap-4 text-base font-medium sm:flex-row">
-          <a
-            className="flex h-12 w-full items-center justify-center gap-2 rounded-full bg-foreground px-5 text-background transition-colors hover:bg-[#383838] dark:hover:bg-[#ccc] md:w-[158px]"
-            href="https://vercel.com/new?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-            target="_blank"
-            rel="noopener noreferrer"
+    <div className="flex flex-col min-h-screen">
+      <Navbar />
+      
+      <main className="flex-grow pt-32 pb-20 px-6 max-w-7xl mx-auto w-full">
+        {/* Hero Section */}
+        <section className="text-center mb-24">
+          <motion.div
+            initial={{ opacity: 0, y: 20 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.6 }}
           >
-            <Image
-              className="dark:invert"
-              src="/vercel.svg"
-              alt="Vercel logomark"
-              width={16}
-              height={16}
-            />
-            Deploy Now
-          </a>
-          <a
-            className="flex h-12 w-full items-center justify-center rounded-full border border-solid border-black/[.08] px-5 transition-colors hover:border-transparent hover:bg-black/[.04] dark:border-white/[.145] dark:hover:bg-[#1a1a1a] md:w-[158px]"
-            href="https://nextjs.org/docs?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            Documentation
-          </a>
-        </div>
+            <h1 className="text-5xl md:text-7xl font-extrabold mb-6 tracking-tight">
+              Prove Your Reputation. <br />
+              <span className="gradient-text">Unlock Your Access.</span>
+            </h1>
+            <p className="text-xl text-gray-400 max-w-2xl mx-auto mb-10">
+              FairGate uses FairScale's on-chain reputation engine to verify your activity 
+              on Solana and grant you exclusive access to tiered content and communities.
+            </p>
+            <div className="flex justify-center">
+              <WalletMultiButtonDynamic />
+            </div>
+          </motion.div>
+        </section>
+
+        {/* Features */}
+        <section className="grid md:grid-cols-4 gap-8 mb-24">
+          {[
+            { icon: Shield, title: "Secure", desc: "No passwords. Only your wallet's history matters." },
+            { icon: Award, title: "Reputation", desc: "Your score is calculated based on real on-chain activity." },
+            { icon: Lock, title: "Gated", desc: "Exclusive content unlocked by your performance." },
+            { icon: Zap, title: "Instant", desc: "Get your FairScore and tier in seconds." }
+          ].map((feature, i) => (
+            <motion.div
+              key={i}
+              className="glass-card p-6"
+              initial={{ opacity: 0, y: 20 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true }}
+              transition={{ delay: i * 0.1 }}
+            >
+              <feature.icon className="w-10 h-10 text-violet-500 mb-4" />
+              <h3 className="text-xl font-semibold mb-2">{feature.title}</h3>
+              <p className="text-gray-400 text-sm leading-relaxed">{feature.desc}</p>
+            </motion.div>
+          ))}
+        </section>
+
+        {/* Tiers Section */}
+        <section className="text-center">
+          <h2 className="text-3xl font-bold mb-12">Tiered Benefits</h2>
+          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4">
+            {[
+              { name: "Bronze", range: "0-40", color: "#cd7f32" },
+              { name: "Silver", range: "40-60", color: "#c0c0c0" },
+              { name: "Gold", range: "60-80", color: "#ffd700" },
+              { name: "Platinum", range: "80-100", color: "#e5e4e2" }
+            ].map((tier, i) => (
+              <div key={i} className="glass-card p-6 border-t-4" style={{ borderTopColor: tier.color }}>
+                <span className="text-2xl mb-2 block">{tier.name}</span>
+                <span className="text-sm text-gray-400">Score: {tier.range}</span>
+              </div>
+            ))}
+          </div>
+        </section>
       </main>
+
+      <footer className="py-10 border-t border-white/5 text-center text-gray-500 text-sm">
+        © 2026 FairGate. Powered by FairScale & Solana.
+      </footer>
     </div>
   );
 }
