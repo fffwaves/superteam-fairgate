@@ -48,7 +48,7 @@ export async function GET(request: NextRequest) {
 
   const apiKey = process.env.FAIRSCALE_API_KEY;
 
-  if (!apiKey || apiKey === 'mock' || wallet === 'demo') {
+  if (wallet === 'demo' || !apiKey || apiKey === 'mock') {
     return NextResponse.json(MOCK_DATA);
   }
 
@@ -56,10 +56,17 @@ export async function GET(request: NextRequest) {
     const response = await fetch(`https://api.fairscale.xyz/score?wallet=${wallet}`, {
       headers: {
         'fairkey': apiKey
-      }
+      },
+      next: { revalidate: 3600 } // Cache for 1 hour
     });
 
     if (!response.ok) {
+      if (response.status === 404) {
+        return NextResponse.json({ error: 'Wallet not found or no activity detected' }, { status: 404 });
+      }
+      if (response.status === 429) {
+        return NextResponse.json({ error: 'Rate limit exceeded. Please try again later.' }, { status: 429 });
+      }
       throw new Error(`FairScale API responded with ${response.status}`);
     }
 
@@ -67,7 +74,9 @@ export async function GET(request: NextRequest) {
     return NextResponse.json(data);
   } catch (error: any) {
     console.error('FairScale API error:', error);
-    // Fallback to mock data in case of error if in dev/demo mode
-    return NextResponse.json(MOCK_DATA);
+    return NextResponse.json(
+      { error: 'Reputation service is currently unavailable. Please try again later.' }, 
+      { status: 503 }
+    );
   }
 }

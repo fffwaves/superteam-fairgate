@@ -7,8 +7,9 @@ import { cn } from "@/lib/utils";
 const inter = Inter({ subsets: ["latin"] });
 
 export const metadata: Metadata = {
-  title: "FairGate | Reputation-Gated Access",
-  description: "Prove your reputation on Solana and unlock exclusive access.",
+  title: "FairGate | On-Chain Reputation Gateway",
+  description: "Verify your Solana reputation and unlock exclusive gated benefits powered by FairScale.",
+  keywords: ["Solana", "Reputation", "FairScale", "Web3", "Gated Content"],
 };
 
 export default function RootLayout({

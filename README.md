@@ -1,36 +1,59 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+# FairGate
 
-## Getting Started
+**Prove Your Reputation. Unlock Your Access.**
 
-First, run the development server:
+FairGate is a production-ready reputation gateway built for the Solana ecosystem. It leverages [FairScale's](https://fairscale.xyz) infrastructure to analyze on-chain activity and social presence, generating a verifiable "FairScore" that grants users access to tiered content, communities, and alpha.
 
-```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
-```
+## 🚀 Live Demo
+[https://superteam-fairgate.vercel.app](https://superteam-fairgate.vercel.app)
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+## ✨ Features
+- **Instant Reputation Scoring**: Connect your wallet to receive an immediate FairScore (0-100).
+- **Tiered Access Control**: Content is dynamically gated based on your reputation tier (Bronze, Silver, Gold, Platinum).
+- **Rich Activity Insights**: View detailed breakdowns of your transaction history, wallet age, and asset holdings.
+- **Proof of Action Badges**: Unlock specific badges for being a "Diamond Hands" holder, "DeFi Native", or "LST Staker".
+- **Responsive & Dark-First UI**: Polished, mobile-friendly interface designed for the Solana community.
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+## 🛠️ FairScale Integration
+FairGate integrates the FairScale API server-side to ensure security and prevent manipulation.
+- **Data Fetching**: The app calls `/api/score` which proxies requests to FairScale's engine with a protected API key.
+- **Reputation Logic**: Scores are used to determine user tiers and unlock specific UI components.
+- **Privacy First**: Analysis is performed on-chain; no personal data is stored by FairGate.
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+## 🏗️ Tech Stack
+- **Framework**: [Next.js 14](https://nextjs.org/) (App Router)
+- **Styling**: [Tailwind CSS](https://tailwindcss.com/)
+- **Animations**: [Framer Motion](https://www.framer.com/motion/)
+- **Blockchain**: [@solana/web3.js](https://solana-labs.github.io/solana-web3.js/) & [@solana/wallet-adapter](https://github.com/solana-labs/wallet-adapter)
+- **Icons**: [Lucide React](https://lucide.dev/)
 
-## Learn More
+## 💻 Local Setup
 
-To learn more about Next.js, take a look at the following resources:
+1. **Clone the repository**
+   ```bash
+   git clone https://github.com/fffwaves/superteam-fairgate.git
+   cd superteam-fairgate
+   ```
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+2. **Install dependencies**
+   ```bash
+   npm install
+   ```
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
+3. **Configure Environment**
+   Create a `.env.local` file in the root:
+   ```env
+   FAIRSCALE_API_KEY=your_api_key_here
+   ```
 
-## Deploy on Vercel
+4. **Run Development Server**
+   ```bash
+   npm run dev
+   ```
+   Open [http://localhost:3000](http://localhost:3000) to see the app.
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
+## 🛡️ License
+Distributed under the MIT License. See `LICENSE` for more information.
 
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+---
+Built for the **Superteam Earn** FairScale Bounty.

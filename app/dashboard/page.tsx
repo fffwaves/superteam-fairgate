@@ -29,14 +29,20 @@ export default function Dashboard() {
     const fetchData = async () => {
       try {
         setLoading(true);
-        const address = publicKey?.toBase58() || 'demo';
-        const response = await fetch(`/api/score?wallet=${address}`);
+        setError(null);
+        const address = publicKey?.toBase58();
         
-        if (!response.ok) {
-          throw new Error('Failed to fetch reputation data');
+        if (!address) {
+          throw new Error('Wallet not connected properly');
         }
 
+        const response = await fetch(`/api/score?wallet=${address}`);
         const result = await response.json();
+
+        if (!response.ok) {
+          throw new Error(result.error || 'Failed to fetch reputation data');
+        }
+
         setData(result);
       } catch (err: any) {
         setError(err.message);
@@ -56,9 +62,26 @@ export default function Dashboard() {
 
       <main className="flex-grow pt-24 pb-20 px-6 max-w-7xl mx-auto w-full">
         {loading ? (
-          <div className="flex flex-col items-center justify-center min-h-[60vh]">
-            <Loader2 className="w-10 h-10 text-violet-500 animate-spin mb-4" />
-            <p className="text-gray-400 animate-pulse">Scanning On-Chain Reputation...</p>
+          <div className="space-y-8 animate-pulse">
+            <div className="flex flex-col md:flex-row md:items-end justify-between gap-4 border-b border-white/5 pb-6">
+              <div className="space-y-2">
+                <div className="h-8 w-64 bg-white/5 rounded" />
+                <div className="h-4 w-40 bg-white/5 rounded" />
+              </div>
+              <div className="h-10 w-32 bg-white/5 rounded" />
+            </div>
+            <div className="grid grid-cols-1 lg:grid-cols-3 gap-8">
+              <div className="h-[300px] bg-white/5 rounded-2xl" />
+              <div className="lg:col-span-2 space-y-8">
+                <div className="h-32 bg-white/5 rounded-2xl" />
+                <div className="grid grid-cols-2 lg:grid-cols-4 gap-4">
+                  {[1, 2, 3, 4].map(i => (
+                    <div key={i} className="h-24 bg-white/5 rounded-2xl" />
+                  ))}
+                </div>
+              </div>
+            </div>
+            <div className="h-64 bg-white/5 rounded-2xl" />
           </div>
         ) : error ? (
           <div className="flex flex-col items-center justify-center min-h-[60vh] text-center">

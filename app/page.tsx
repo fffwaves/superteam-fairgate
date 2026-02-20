@@ -29,22 +29,29 @@ export default function LandingPage() {
       
       <main className="flex-grow pt-32 pb-20 px-6 max-w-7xl mx-auto w-full">
         {/* Hero Section */}
-        <section className="text-center mb-24">
+        <section className="text-center mb-24 relative">
+          <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[500px] h-[500px] bg-violet-600/10 blur-[120px] rounded-full -z-10" />
           <motion.div
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.6 }}
           >
-            <h1 className="text-5xl md:text-7xl font-extrabold mb-6 tracking-tight">
-              Prove Your Reputation. <br />
-              <span className="gradient-text">Unlock Your Access.</span>
+            <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-violet-500/10 border border-violet-500/20 text-violet-400 text-xs font-bold uppercase tracking-widest mb-8">
+              <Zap className="w-3 h-3 fill-current" /> Powered by FairScale
+            </div>
+            <h1 className="text-5xl md:text-8xl font-extrabold mb-8 tracking-tighter leading-[0.9]">
+              The Reputation <br />
+              <span className="gradient-text">Layer of Solana.</span>
             </h1>
-            <p className="text-xl text-gray-400 max-w-2xl mx-auto mb-10">
-              FairGate uses FairScale's on-chain reputation engine to verify your activity 
-              on Solana and grant you exclusive access to tiered content and communities.
+            <p className="text-lg md:text-xl text-gray-400 max-w-2xl mx-auto mb-12 leading-relaxed">
+              FairGate instantly verifies your on-chain history to calculate your 
+              FairScore. Join the elite and unlock exclusive gated benefits.
             </p>
-            <div className="flex justify-center">
+            <div className="flex flex-col sm:flex-row justify-center items-center gap-4">
               <WalletMultiButtonDynamic />
+              <a href="#tiers" className="text-sm font-semibold text-gray-400 hover:text-white transition-colors">
+                View Tier Benefits ↓
+              </a>
             </div>
           </motion.div>
         </section>
@@ -73,19 +80,26 @@ export default function LandingPage() {
         </section>
 
         {/* Tiers Section */}
-        <section className="text-center">
-          <h2 className="text-3xl font-bold mb-12">Tiered Benefits</h2>
-          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4">
+        <section id="tiers" className="text-center">
+          <h2 className="text-3xl font-bold mb-4">Reputation Tiers</h2>
+          <p className="text-gray-500 mb-12">Higher scores unlock greater opportunities.</p>
+          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
             {[
-              { name: "Bronze", range: "0-40", color: "#cd7f32" },
-              { name: "Silver", range: "40-60", color: "#c0c0c0" },
-              { name: "Gold", range: "60-80", color: "#ffd700" },
-              { name: "Platinum", range: "80-100", color: "#e5e4e2" }
+              { name: "Bronze", range: "0-40", color: "#cd7f32", glow: "shadow-[0_0_20px_rgba(205,127,50,0.15)]" },
+              { name: "Silver", range: "40-60", color: "#c0c0c0", glow: "shadow-[0_0_20px_rgba(192,192,192,0.15)]" },
+              { name: "Gold", range: "60-80", color: "#ffd700", glow: "shadow-[0_0_20px_rgba(255,215,0,0.15)]" },
+              { name: "Platinum", range: "80-100", color: "#e5e4e2", glow: "shadow-[0_0_20px_rgba(229,228,226,0.15)]" }
             ].map((tier, i) => (
-              <div key={i} className="glass-card p-6 border-t-4" style={{ borderTopColor: tier.color }}>
-                <span className="text-2xl mb-2 block">{tier.name}</span>
-                <span className="text-sm text-gray-400">Score: {tier.range}</span>
-              </div>
+              <motion.div 
+                key={i} 
+                whileHover={{ y: -5 }}
+                className={`glass-card p-8 border-t-4 transition-all ${tier.glow}`} 
+                style={{ borderTopColor: tier.color }}
+              >
+                <span className="text-2xl font-bold mb-2 block" style={{ color: tier.color }}>{tier.name}</span>
+                <span className="text-xs text-gray-500 uppercase tracking-widest block mb-4">FairScore</span>
+                <span className="text-xl font-mono text-white/80">{tier.range}</span>
+              </motion.div>
             ))}
           </div>
         </section>
