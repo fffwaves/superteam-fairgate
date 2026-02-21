@@ -13,10 +13,10 @@
 ## TODO
 
 ### Submission
-- [ ] Manual browser QA — connect wallet, verify score fetch + tier display
-- [ ] Screenshot the live app for README
+- [x] Manual browser QA — connect wallet, verify score fetch + tier display ✅
+- [x] Screenshot the live app for README ✅
 - [ ] Submit on Superteam Earn: https://earn.superteam.fun/listings/fairathon/
-- [ ] Make repo public before submitting ✅ (already public)
+- [x] Make repo public before submitting ✅ (already public)
 
 ### Optional polish (if time allows)
 - [ ] Add demo video / screen recording for submission

@@ -7,6 +7,8 @@ FairGate is a production-ready reputation gateway built for the Solana ecosystem
 ## 🚀 Live Demo
 [https://superteam-fairgate.vercel.app](https://superteam-fairgate.vercel.app)
 
+![FairGate Dashboard](public/screenshot.png)
+
 ## ✨ Features
 - **Instant Reputation Scoring**: Connect your wallet to receive an immediate FairScore (0-100).
 - **Tiered Access Control**: Content is dynamically gated based on your reputation tier (Bronze, Silver, Gold, Platinum).
