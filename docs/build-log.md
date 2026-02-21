@@ -1,5 +1,30 @@
 # FairGate Build Log
 
+## 2026-02-21 (18:10 UTC — Autonomous session)
+
+**Session type:** Cron autonomous work (18:00)
+
+**Status check:**
+- TASKS.md: only remaining item is manual Superteam Earn submission
+- 15 submissions already on listing; deadline Mar 1 2026 (8 days)
+
+**Work done:**
+- ✅ Added "Refresh Score" button to dashboard — lets users re-fetch without page reload
+  - Shows spinner while refreshing, cache-busting `?t=` timestamp param
+  - Sits next to "Last Updated" in dashboard header
+  - Build verified clean (Next.js 14, no type errors)
+- ✅ Created `docs/submission.md` — full write-up with copy-paste submission text,
+  field mapping table, and pre-submission checklist for Superteam Earn form
+
+**Remaining TODOs (require human):**
+- **Submit on Superteam Earn** — see `docs/submission.md` for ready-to-paste text
+  URL: https://earn.superteam.fun/listings/fairathon/
+- Optional: demo video, Xverse wallet support
+
+**Commit:** `7f246c7` pushed to fffwaves/superteam-fairgate (main branch)
+
+
+
 ## 2026-02-21
 
 ### 06:01 UTC — Autonomous session
