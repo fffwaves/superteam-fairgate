@@ -23,6 +23,8 @@
 - [ ] Add Xverse wallet support
 - [x] Add share-your-score button (Twitter intent) ✅
 - [x] Refresh score button on dashboard ✅
+- [x] Open Graph + Twitter Card meta tags ✅ (Feb 21)
+- [x] Landing page screenshot added (public/screenshot.png) ✅ (Feb 21)
 
 ---
 
