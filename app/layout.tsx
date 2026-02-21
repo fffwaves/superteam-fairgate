@@ -10,6 +10,27 @@ export const metadata: Metadata = {
   title: "FairGate | On-Chain Reputation Gateway",
   description: "Verify your Solana reputation and unlock exclusive gated benefits powered by FairScale.",
   keywords: ["Solana", "Reputation", "FairScale", "Web3", "Gated Content"],
+  openGraph: {
+    title: "FairGate | On-Chain Reputation Gateway",
+    description: "Connect your Solana wallet to receive an instant FairScore (0–100) and unlock tiered content based on your on-chain reputation.",
+    url: "https://superteam-fairgate.vercel.app",
+    siteName: "FairGate",
+    images: [
+      {
+        url: "https://superteam-fairgate.vercel.app/screenshot.png",
+        width: 1280,
+        height: 900,
+        alt: "FairGate — The Reputation Layer of Solana",
+      },
+    ],
+    type: "website",
+  },
+  twitter: {
+    card: "summary_large_image",
+    title: "FairGate | On-Chain Reputation Gateway",
+    description: "Connect your Solana wallet to receive an instant FairScore and unlock tiered gated content powered by FairScale.",
+    images: ["https://superteam-fairgate.vercel.app/screenshot.png"],
+  },
 };
 
 export default function RootLayout({
