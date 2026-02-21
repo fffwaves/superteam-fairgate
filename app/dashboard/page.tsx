@@ -10,7 +10,7 @@ import { BadgeGrid } from '@/components/BadgeGrid';
 import { StatsRow } from '@/components/StatsRow';
 import { GatedContent } from '@/components/GatedContent';
 import { FairScaleResponse } from '@/lib/types';
-import { Loader2, AlertCircle } from 'lucide-react';
+import { Loader2, AlertCircle, RefreshCw } from 'lucide-react';
 import { motion } from 'framer-motion';
 
 export default function Dashboard() {
@@ -18,41 +18,37 @@ export default function Dashboard() {
   const router = useRouter();
   const [data, setData] = useState<FairScaleResponse | null>(null);
   const [loading, setLoading] = useState(true);
+  const [refreshing, setRefreshing] = useState(false);
   const [error, setError] = useState<string | null>(null);
+
+  const fetchData = React.useCallback(async (isRefresh = false) => {
+    if (!connected || !publicKey) return;
+    try {
+      if (isRefresh) setRefreshing(true);
+      else setLoading(true);
+      setError(null);
+      const address = publicKey.toBase58();
+      const response = await fetch(`/api/score?wallet=${address}&t=${Date.now()}`);
+      const result = await response.json();
+      if (!response.ok) {
+        throw new Error(result.error || 'Failed to fetch reputation data');
+      }
+      setData(result);
+    } catch (err: any) {
+      setError(err.message);
+    } finally {
+      setLoading(false);
+      setRefreshing(false);
+    }
+  }, [connected, publicKey]);
 
   useEffect(() => {
     if (!connected) {
       router.push('/');
       return;
     }
-
-    const fetchData = async () => {
-      try {
-        setLoading(true);
-        setError(null);
-        const address = publicKey?.toBase58();
-        
-        if (!address) {
-          throw new Error('Wallet not connected properly');
-        }
-
-        const response = await fetch(`/api/score?wallet=${address}`);
-        const result = await response.json();
-
-        if (!response.ok) {
-          throw new Error(result.error || 'Failed to fetch reputation data');
-        }
-
-        setData(result);
-      } catch (err: any) {
-        setError(err.message);
-      } finally {
-        setLoading(false);
-      }
-    };
-
     fetchData();
-  }, [connected, publicKey, router]);
+  }, [connected, publicKey, router, fetchData]);
 
   if (!connected) return null;
 
@@ -109,9 +105,20 @@ export default function Dashboard() {
                   Wallet: {data.wallet.slice(0, 4)}...{data.wallet.slice(-4)}
                 </p>
               </div>
-              <div className="text-right">
-                <span className="text-[10px] uppercase text-gray-500 block mb-1">Last Updated</span>
-                <span className="text-xs text-gray-400">{new Date(data.timestamp).toLocaleString()}</span>
+              <div className="flex items-center gap-4">
+                <div className="text-right">
+                  <span className="text-[10px] uppercase text-gray-500 block mb-1">Last Updated</span>
+                  <span className="text-xs text-gray-400">{new Date(data.timestamp).toLocaleString()}</span>
+                </div>
+                <button
+                  onClick={() => fetchData(true)}
+                  disabled={refreshing}
+                  className="flex items-center gap-1.5 px-3 py-2 rounded-lg text-xs font-semibold text-gray-400 hover:text-white hover:bg-white/10 border border-white/10 transition-all disabled:opacity-50 disabled:cursor-not-allowed"
+                  title="Refresh score"
+                >
+                  <RefreshCw className={`w-3.5 h-3.5 ${refreshing ? 'animate-spin' : ''}`} />
+                  {refreshing ? 'Refreshing…' : 'Refresh'}
+                </button>
               </div>
             </div>
 

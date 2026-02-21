@@ -15,13 +15,14 @@
 ### Submission
 - [x] Manual browser QA — connect wallet, verify score fetch + tier display ✅
 - [x] Screenshot the live app for README ✅
-- [ ] Submit on Superteam Earn: https://earn.superteam.fun/listings/fairathon/
+- [ ] **HUMAN ACTION REQUIRED:** Submit on Superteam Earn: https://earn.superteam.fun/listings/fairathon/ — see docs/submission.md for copy-paste text
 - [x] Make repo public before submitting ✅ (already public)
 
 ### Optional polish (if time allows)
 - [ ] Add demo video / screen recording for submission
 - [ ] Add Xverse wallet support
 - [x] Add share-your-score button (Twitter intent) ✅
+- [x] Refresh score button on dashboard ✅
 
 ---
 
