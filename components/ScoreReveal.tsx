@@ -3,6 +3,7 @@
 import React, { useEffect, useState } from 'react';
 import { motion, useSpring, useTransform } from 'framer-motion';
 import { getTierColor } from '@/lib/utils';
+import { Twitter } from 'lucide-react';
 
 interface ScoreRevealProps {
   score: number;
@@ -73,6 +74,19 @@ export const ScoreReveal: React.FC<ScoreRevealProps> = ({ score, tier }) => {
       >
         {tier} Tier
       </motion.div>
+
+      <motion.a
+        href={`https://twitter.com/intent/tweet?text=${encodeURIComponent(`🔮 My FairScore on @FairScaleXYZ is ${score.toFixed(1)} — ${tier.charAt(0).toUpperCase() + tier.slice(1)} Tier!\n\nProve your Solana reputation on FairGate 👇\nhttps://superteam-fairgate.vercel.app`)}`}
+        target="_blank"
+        rel="noopener noreferrer"
+        className="mt-4 flex items-center gap-2 px-4 py-2 rounded-lg text-xs font-semibold text-white/60 hover:text-white hover:bg-white/10 transition-all border border-white/10"
+        initial={{ opacity: 0 }}
+        animate={{ opacity: 1 }}
+        transition={{ delay: 1.3 }}
+      >
+        <Twitter className="w-3.5 h-3.5" />
+        Share your score
+      </motion.a>
     </div>
   );
 };
