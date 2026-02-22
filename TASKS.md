@@ -20,11 +20,13 @@
 
 ### Optional polish (if time allows)
 - [ ] Add demo video / screen recording for submission
-- [ ] Add Xverse wallet support
+- [ ] Add Xverse wallet support (BTC-first wallet, no Solana adapter available)
 - [x] Add share-your-score button (Twitter intent) ✅
 - [x] Refresh score button on dashboard ✅
 - [x] Open Graph + Twitter Card meta tags ✅ (Feb 21)
 - [x] Landing page screenshot added (public/screenshot.png) ✅ (Feb 21)
+- [x] "How It Works" 3-step section added to landing page ✅ (Feb 22)
+- [x] Coinbase Wallet adapter added ✅ (Feb 22)
 
 ---
 
