@@ -3,7 +3,7 @@
 import React, { FC, useMemo } from 'react';
 import { ConnectionProvider, WalletProvider } from '@solana/wallet-adapter-react';
 import { WalletAdapterNetwork } from '@solana/wallet-adapter-base';
-import { PhantomWalletAdapter, SolflareWalletAdapter } from '@solana/wallet-adapter-wallets';
+import { PhantomWalletAdapter, SolflareWalletAdapter, CoinbaseWalletAdapter } from '@solana/wallet-adapter-wallets';
 import {
     WalletModalProvider,
 } from '@solana/wallet-adapter-react-ui';
@@ -23,6 +23,7 @@ export const SolanaWalletProvider: FC<{ children: React.ReactNode }> = ({ childr
         () => [
             new PhantomWalletAdapter(),
             new SolflareWalletAdapter(),
+            new CoinbaseWalletAdapter(),
         ],
         // eslint-disable-next-line react-hooks/exhaustive-deps
         [network]

@@ -5,7 +5,7 @@ import { useRouter } from 'next/navigation';
 import { useEffect } from 'react';
 import { Navbar } from '@/components/Navbar';
 import { motion } from 'framer-motion';
-import { Shield, Lock, Award, Zap } from 'lucide-react';
+import { Shield, Lock, Award, Zap, Wallet, BarChart2, Unlock } from 'lucide-react';
 import dynamic from 'next/dynamic';
 
 const WalletMultiButtonDynamic = dynamic(
@@ -77,6 +77,37 @@ export default function LandingPage() {
               <p className="text-gray-400 text-sm leading-relaxed">{feature.desc}</p>
             </motion.div>
           ))}
+        </section>
+
+        {/* How It Works */}
+        <section className="mb-24">
+          <h2 className="text-3xl font-bold text-center mb-4">How It Works</h2>
+          <p className="text-gray-500 text-center mb-12">Three steps to unlock your on-chain reputation.</p>
+          <div className="relative grid md:grid-cols-3 gap-8">
+            {/* connector line */}
+            <div className="hidden md:block absolute top-10 left-[calc(16.67%+16px)] right-[calc(16.67%+16px)] h-px bg-gradient-to-r from-violet-500/0 via-violet-500/30 to-violet-500/0" />
+            {[
+              { icon: Wallet, step: '01', title: 'Connect Wallet', desc: 'Link your Solana wallet — Phantom, Solflare, Coinbase Wallet, or any Wallet Standard compatible wallet.' },
+              { icon: BarChart2, step: '02', title: 'Score Calculated', desc: 'FairScale analyzes your on-chain activity — transactions, DeFi, staking, NFTs — and computes your FairScore in real-time.' },
+              { icon: Unlock, step: '03', title: 'Unlock Benefits', desc: 'Your tier (Bronze → Platinum) determines which gated content, signals, and communities you can access.' },
+            ].map((item, i) => (
+              <motion.div
+                key={i}
+                className="glass-card p-8 text-center relative"
+                initial={{ opacity: 0, y: 20 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                viewport={{ once: true }}
+                transition={{ delay: i * 0.15 }}
+              >
+                <div className="inline-flex items-center justify-center w-16 h-16 rounded-full bg-violet-500/10 border border-violet-500/20 mb-6">
+                  <item.icon className="w-7 h-7 text-violet-400" />
+                </div>
+                <div className="absolute top-4 right-4 text-[10px] font-mono text-violet-500/50 tracking-widest">{item.step}</div>
+                <h3 className="text-lg font-bold mb-3">{item.title}</h3>
+                <p className="text-gray-400 text-sm leading-relaxed">{item.desc}</p>
+              </motion.div>
+            ))}
+          </div>
         </section>
 
         {/* Tiers Section */}
