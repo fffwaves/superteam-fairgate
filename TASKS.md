@@ -19,6 +19,7 @@
 - [x] Make repo public before submitting ✅ (already public)
 
 ### Optional polish (if time allows)
+- [x] Judge's Evaluation Panel on /demo — collapsible checklist of 6 FairScale integration points with source file refs ✅ (Feb 23)
 - [ ] Add demo video / screen recording for submission
 - [x] README overhaul for judges — cleaner structure, project tree, FairScale integration details ✅ (Feb 23)
 - [ ] Add Xverse wallet support (BTC-first wallet, no Solana adapter available)
