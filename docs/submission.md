@@ -22,9 +22,11 @@ FairGate is a production-ready reputation gateway built on Solana, powered by Fa
 - Fetches FairScore and reputation data from the FairScale API via a secure server-side proxy (`/api/score`)
 - Displays a score reveal animation with tier badge (Bronze / Silver / Gold / Platinum)
 - Shows proof-of-action badges (Diamond Hands, DeFi Native, Early Adopter, LST Staker)
+- Score Breakdown panel: visualizes `fairscore_base` (on-chain) vs `social_score` split with animated progress bars
 - Gates content sections by tier — each tier unlocks progressively more alpha
 - Includes a "Share your score" Twitter intent so users can flex their reputation
 - Full skeleton loading states, error handling, and mobile responsive design
+- **Live demo mode** at `/demo` — judges can explore the full dashboard UI without connecting a wallet
 
 **FairScale Integration:**
 - API called server-side with `fairkey` header to prevent key exposure
@@ -53,6 +55,7 @@ FairGate is a production-ready reputation gateway built on Solana, powered by Fa
 |-------|-------|
 | Project Name | FairGate |
 | Demo URL | https://superteam-fairgate.vercel.app |
+| Demo (no wallet) | https://superteam-fairgate.vercel.app/demo |
 | Repo URL | https://github.com/fffwaves/superteam-fairgate |
 | Description | (use the block above) |
 | Tech Stack | Next.js 14, Tailwind, Framer Motion, Solana Wallet Adapter, FairScale API |

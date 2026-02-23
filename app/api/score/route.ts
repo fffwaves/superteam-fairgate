@@ -25,6 +25,12 @@ const MOCK_DATA: FairScaleResponse = {
       label: "Early Adopter",
       description: "Joined Solana ecosystem early",
       tier: "silver"
+    },
+    {
+      id: "lst_staker",
+      label: "LST Staker",
+      description: "Staking via liquid staking tokens (mSOL, jitoSOL, bSOL)",
+      tier: "gold"
     }
   ],
   timestamp: new Date().toISOString(),

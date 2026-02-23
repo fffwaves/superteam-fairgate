@@ -21,6 +21,11 @@
 ### Optional polish (if time allows)
 - [ ] Add demo video / screen recording for submission
 - [ ] Add Xverse wallet support (BTC-first wallet, no Solana adapter available)
+- [x] Add /demo page — judges can explore full dashboard UI without connecting a wallet ✅ (Feb 23)
+- [x] Score Breakdown panel (fairscore_base vs social_score animated bars) ✅ (Feb 22)
+- [x] LST Staker badge added to mock data ✅ (Feb 22)
+- [x] FAQ section + final CTA section added to landing page ✅ (Feb 22)
+- [x] Enhanced footer with links (FairScale, GitHub, Solana) ✅ (Feb 22)
 - [x] Add share-your-score button (Twitter intent) ✅
 - [x] Refresh score button on dashboard ✅
 - [x] Open Graph + Twitter Card meta tags ✅ (Feb 21)

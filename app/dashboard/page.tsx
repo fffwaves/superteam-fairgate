@@ -9,6 +9,7 @@ import { TierCard } from '@/components/TierCard';
 import { BadgeGrid } from '@/components/BadgeGrid';
 import { StatsRow } from '@/components/StatsRow';
 import { GatedContent } from '@/components/GatedContent';
+import { ScoreBreakdown } from '@/components/ScoreBreakdown';
 import { FairScaleResponse } from '@/lib/types';
 import { Loader2, AlertCircle, RefreshCw } from 'lucide-react';
 import { motion } from 'framer-motion';
@@ -129,6 +130,11 @@ export default function Dashboard() {
               </div>
               <div className="lg:col-span-2 space-y-8">
                 <TierCard currentTier={data.tier} score={data.fairscore} />
+                <ScoreBreakdown
+                  fairscoreBase={data.fairscore_base}
+                  socialScore={data.social_score}
+                  total={data.fairscore}
+                />
                 <StatsRow features={data.features} />
               </div>
             </div>
