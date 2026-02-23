@@ -20,6 +20,7 @@
 
 ### Optional polish (if time allows)
 - [ ] Add demo video / screen recording for submission
+- [x] README overhaul for judges — cleaner structure, project tree, FairScale integration details ✅ (Feb 23)
 - [ ] Add Xverse wallet support (BTC-first wallet, no Solana adapter available)
 - [x] Add /demo page — judges can explore full dashboard UI without connecting a wallet ✅ (Feb 23)
 - [x] Tier switcher on /demo — judges can toggle Bronze/Silver/Gold/Platinum to see gating in action ✅ (Feb 23)
