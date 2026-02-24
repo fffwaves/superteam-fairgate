@@ -1,0 +1,77 @@
+.wrap {
+  border: 1px solid var(--bg-border);
+  padding: 1.5rem;
+}
+
+.title {
+  font-family: var(--font-mono);
+  font-size: 0.6rem;
+  text-transform: uppercase;
+  letter-spacing: 0.14em;
+  color: var(--text-dim);
+  margin-bottom: 1.5rem;
+}
+
+.grid {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  border-top: 1px solid var(--bg-border);
+  border-left: 1px solid var(--bg-border);
+}
+
+@media (min-width: 640px) {
+  .grid {
+    grid-template-columns: repeat(3, 1fr);
+  }
+}
+
+@media (min-width: 768px) {
+  .grid {
+    grid-template-columns: repeat(4, 1fr);
+  }
+}
+
+.badge {
+  padding: 1rem;
+  border-right: 1px solid var(--bg-border);
+  border-bottom: 1px solid var(--bg-border);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 0.4rem;
+  transition: background 0.15s;
+  cursor: default;
+}
+
+.badge:hover {
+  background: var(--bg-subtle);
+}
+
+.badgeIcon {
+  margin-bottom: 0.25rem;
+}
+
+.badgeName {
+  font-size: 0.8rem;
+  text-align: center;
+  color: var(--text);
+  font-family: var(--font-sans);
+}
+
+.badgeTier {
+  font-family: var(--font-mono);
+  font-size: 0.58rem;
+  text-transform: uppercase;
+  letter-spacing: 0.1em;
+  color: var(--text-dim);
+}
+
+.empty {
+  grid-column: 1 / -1;
+  padding: 2.5rem;
+  text-align: center;
+  font-family: var(--font-mono);
+  font-size: 0.7rem;
+  color: var(--text-dim);
+  font-style: italic;
+}

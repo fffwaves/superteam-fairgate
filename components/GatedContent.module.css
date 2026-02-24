@@ -1,0 +1,123 @@
+.title {
+  font-family: var(--font-mono);
+  font-size: 0.6rem;
+  text-transform: uppercase;
+  letter-spacing: 0.14em;
+  color: var(--text-dim);
+  margin-bottom: 1.5rem;
+}
+
+.grid {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 0;
+  border-top: 1px solid var(--bg-border);
+  border-left: 1px solid var(--bg-border);
+}
+
+@media (min-width: 768px) {
+  .grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+
+.panel {
+  padding: 1.5rem;
+  border-right: 1px solid var(--bg-border);
+  border-bottom: 1px solid var(--bg-border);
+  position: relative;
+  transition: border-color 0.15s;
+}
+
+.panelUnlocked {
+  border-left: 3px solid var(--accent);
+}
+
+.panelLocked {
+  opacity: 0.4;
+}
+
+.panelHead {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+  margin-bottom: 1rem;
+}
+
+.panelIconWrap {
+  color: var(--accent);
+}
+
+.panelIconWrapLocked {
+  color: var(--text-dim);
+}
+
+.panelTitle {
+  font-family: var(--font-serif);
+  font-size: 1.15rem;
+  color: var(--text);
+  display: block;
+}
+
+.panelReq {
+  font-family: var(--font-mono);
+  font-size: 0.58rem;
+  text-transform: uppercase;
+  letter-spacing: 0.1em;
+  color: var(--text-dim);
+  display: block;
+  margin-top: 0.15rem;
+}
+
+.statusIcon {
+  position: absolute;
+  top: 1rem;
+  right: 1rem;
+}
+
+.unlockedIcon {
+  color: var(--accent);
+}
+
+.lockedIcon {
+  color: var(--text-dim);
+}
+
+.content {
+  font-size: 0.85rem;
+  color: var(--text-muted);
+  line-height: 1.6;
+}
+
+.placeholder {
+  height: 5rem;
+  border: 1px solid var(--bg-border);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-top: 0.75rem;
+}
+
+.pulse {
+  font-family: var(--font-mono);
+  font-size: 0.65rem;
+  color: var(--accent);
+  animation: blink 1.5s ease-in-out infinite;
+}
+
+@keyframes blink {
+  0%, 100% { opacity: 1; }
+  50% { opacity: 0.3; }
+}
+
+.lockedContent {
+  font-size: 0.85rem;
+  color: var(--text-dim);
+  line-height: 1.6;
+}
+
+.lockedPlaceholder {
+  height: 5rem;
+  border: 1px solid var(--bg-border);
+  margin-top: 0.75rem;
+}

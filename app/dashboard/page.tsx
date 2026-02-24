@@ -11,8 +11,9 @@ import { StatsRow } from '@/components/StatsRow';
 import { GatedContent } from '@/components/GatedContent';
 import { ScoreBreakdown } from '@/components/ScoreBreakdown';
 import { FairScaleResponse } from '@/lib/types';
-import { Loader2, AlertCircle, RefreshCw } from 'lucide-react';
+import { AlertCircle, RefreshCw } from 'lucide-react';
 import { motion } from 'framer-motion';
+import styles from './dashboard.module.css';
 
 export default function Dashboard() {
   const { publicKey, connected } = useWallet();
@@ -35,8 +36,8 @@ export default function Dashboard() {
         throw new Error(result.error || 'Failed to fetch reputation data');
       }
       setData(result);
-    } catch (err: any) {
-      setError(err.message);
+    } catch (err: unknown) {
+      setError(err instanceof Error ? err.message : 'Unknown error');
     } finally {
       setLoading(false);
       setRefreshing(false);
@@ -54,101 +55,92 @@ export default function Dashboard() {
   if (!connected) return null;
 
   return (
-    <div className="flex flex-col min-h-screen">
+    <div className={styles.page}>
       <Navbar />
 
-      <main className="flex-grow pt-24 pb-20 px-6 max-w-7xl mx-auto w-full">
+      <main className={styles.main}>
         {loading ? (
-          <div className="space-y-8 animate-pulse">
-            <div className="flex flex-col md:flex-row md:items-end justify-between gap-4 border-b border-white/5 pb-6">
-              <div className="space-y-2">
-                <div className="h-8 w-64 bg-white/5 rounded" />
-                <div className="h-4 w-40 bg-white/5 rounded" />
-              </div>
-              <div className="h-10 w-32 bg-white/5 rounded" />
+          <div>
+            <div className={styles.skeletonHeader}>
+              <div className={styles.skeletonLine} style={{ height: '2rem', width: '16rem' }} />
+              <div className={styles.skeletonLine} style={{ height: '0.875rem', width: '10rem' }} />
             </div>
-            <div className="grid grid-cols-1 lg:grid-cols-3 gap-8">
-              <div className="h-[300px] bg-white/5 rounded-2xl" />
-              <div className="lg:col-span-2 space-y-8">
-                <div className="h-32 bg-white/5 rounded-2xl" />
-                <div className="grid grid-cols-2 lg:grid-cols-4 gap-4">
-                  {[1, 2, 3, 4].map(i => (
-                    <div key={i} className="h-24 bg-white/5 rounded-2xl" />
-                  ))}
-                </div>
-              </div>
+            <div className={styles.skeletonGrid}>
+              <div className={styles.skeletonBlock} style={{ height: '320px' }} />
+              <div className={styles.skeletonBlock} style={{ height: '320px' }} />
             </div>
-            <div className="h-64 bg-white/5 rounded-2xl" />
           </div>
         ) : error ? (
-          <div className="flex flex-col items-center justify-center min-h-[60vh] text-center">
-            <AlertCircle className="w-12 h-12 text-red-500 mb-4" />
-            <h2 className="text-2xl font-bold mb-2">Error Loading Data</h2>
-            <p className="text-gray-400 mb-6">{error}</p>
-            <button 
-              onClick={() => window.location.reload()}
-              className="px-6 py-2 bg-violet-600 rounded-lg font-semibold hover:bg-violet-700 transition-colors"
-            >
+          <div className={styles.errorWrap}>
+            <AlertCircle size={40} style={{ color: 'var(--accent)' }} />
+            <h2 className={styles.errorTitle}>Error Loading Data</h2>
+            <p className={styles.errorMsg}>{error}</p>
+            <button className={styles.retryBtn} onClick={() => window.location.reload()}>
               Try Again
             </button>
           </div>
         ) : data ? (
-          <motion.div 
-            initial={{ opacity: 0 }}
-            animate={{ opacity: 1 }}
-            className="space-y-8"
-          >
-            {/* Header info */}
-            <div className="flex flex-col md:flex-row md:items-end justify-between gap-4 border-b border-white/5 pb-6">
+          <motion.div initial={{ opacity: 0 }} animate={{ opacity: 1 }}>
+            {/* Header */}
+            <div className={styles.header}>
               <div>
-                <h1 className="text-3xl font-bold tracking-tight mb-1">Reputation Dashboard</h1>
-                <p className="text-gray-500 text-sm font-mono">
-                  Wallet: {data.wallet.slice(0, 4)}...{data.wallet.slice(-4)}
+                <h1 className={styles.headerTitle}>Reputation Dashboard</h1>
+                <p className={styles.wallet}>
+                  {data.wallet.slice(0, 6)}...{data.wallet.slice(-6)}
                 </p>
               </div>
-              <div className="flex items-center gap-4">
-                <div className="text-right">
-                  <span className="text-[10px] uppercase text-gray-500 block mb-1">Last Updated</span>
-                  <span className="text-xs text-gray-400">{new Date(data.timestamp).toLocaleString()}</span>
+              <div className={styles.headerRight}>
+                <div className={styles.timestampWrap}>
+                  <span className={styles.timestampLabel}>Last Updated</span>
+                  <span className={styles.timestamp}>{new Date(data.timestamp).toLocaleString()}</span>
                 </div>
                 <button
                   onClick={() => fetchData(true)}
                   disabled={refreshing}
-                  className="flex items-center gap-1.5 px-3 py-2 rounded-lg text-xs font-semibold text-gray-400 hover:text-white hover:bg-white/10 border border-white/10 transition-all disabled:opacity-50 disabled:cursor-not-allowed"
-                  title="Refresh score"
+                  className={styles.refreshBtn}
                 >
-                  <RefreshCw className={`w-3.5 h-3.5 ${refreshing ? 'animate-spin' : ''}`} />
+                  <RefreshCw size={12} className={refreshing ? styles.spinning : undefined} />
                   {refreshing ? 'Refreshing…' : 'Refresh'}
                 </button>
               </div>
             </div>
 
-            {/* Top row: Score + Tier info */}
-            <div className="grid grid-cols-1 lg:grid-cols-3 gap-8">
-              <div className="lg:col-span-1">
+            {/* Top grid */}
+            <div className={styles.topGrid}>
+              <div className={styles.gridLeft}>
                 <ScoreReveal score={data.fairscore} tier={data.tier} />
               </div>
-              <div className="lg:col-span-2 space-y-8">
-                <TierCard currentTier={data.tier} score={data.fairscore} />
-                <ScoreBreakdown
-                  fairscoreBase={data.fairscore_base}
-                  socialScore={data.social_score}
-                  total={data.fairscore}
-                />
-                <StatsRow features={data.features} />
+              <div className={styles.gridRight}>
+                <div className={styles.gridRightInner}>
+                  <TierCard currentTier={data.tier} score={data.fairscore} />
+                </div>
+                <div className={styles.gridRightInner}>
+                  <ScoreBreakdown
+                    fairscoreBase={data.fairscore_base}
+                    socialScore={data.social_score}
+                    total={data.fairscore}
+                  />
+                </div>
+                <div className={styles.gridRightInner}>
+                  <StatsRow features={data.features} />
+                </div>
               </div>
             </div>
 
-            {/* Middle row: Badges */}
-            <BadgeGrid badges={data.badges} />
+            {/* Badges */}
+            <div className={styles.section}>
+              <BadgeGrid badges={data.badges} />
+            </div>
 
-            {/* Bottom row: Gated Content */}
-            <GatedContent currentTier={data.tier} />
+            {/* Gated Content */}
+            <div className={styles.section}>
+              <GatedContent currentTier={data.tier} />
+            </div>
           </motion.div>
         ) : null}
       </main>
 
-      <footer className="py-10 border-t border-white/5 text-center text-gray-500 text-sm">
+      <footer className={styles.footer}>
         © 2026 FairGate. All rights reserved.
       </footer>
     </div>

@@ -3,7 +3,7 @@
 import React from 'react';
 import { motion } from 'framer-motion';
 import { Lock, Unlock, Users, Zap, TrendingUp, Crown } from 'lucide-react';
-import { cn } from '@/lib/utils';
+import styles from './GatedContent.module.css';
 
 interface GatedContentProps {
   currentTier: string;
@@ -36,17 +36,29 @@ const INNER_CIRCLE_POSTS = [
 
 function CommunityFeed() {
   return (
-    <div className="space-y-2">
+    <div>
       {COMMUNITY_POSTS.map((post, i) => (
-        <div key={i} className="flex gap-3 py-2 border-b border-white/5 last:border-0">
-          <div className="w-6 h-6 rounded-full bg-violet-500/20 flex items-center justify-center text-[10px] text-violet-400 font-bold flex-shrink-0">
+        <div key={i} style={{
+          display: 'flex',
+          gap: '0.75rem',
+          padding: '0.6rem 0',
+          borderBottom: i < COMMUNITY_POSTS.length - 1 ? '1px solid var(--bg-border)' : 'none'
+        }}>
+          <div style={{
+            width: '1.5rem', height: '1.5rem',
+            background: 'var(--accent-dim)',
+            display: 'flex', alignItems: 'center', justifyContent: 'center',
+            fontSize: '0.6rem', color: 'var(--accent)',
+            fontFamily: 'var(--font-mono)', fontWeight: 600,
+            flexShrink: 0
+          }}>
             {post.user[0].toUpperCase()}
           </div>
-          <div className="flex-1 min-w-0">
-            <span className="text-[11px] text-violet-400 font-semibold">@{post.user}</span>
-            <p className="text-xs text-gray-300 mt-0.5 leading-snug">{post.text}</p>
+          <div style={{ flex: 1, minWidth: 0 }}>
+            <span style={{ fontFamily: 'var(--font-mono)', fontSize: '0.62rem', color: 'var(--accent)' }}>@{post.user}</span>
+            <p style={{ fontSize: '0.78rem', color: 'var(--text-muted)', marginTop: '0.2rem', lineHeight: 1.5 }}>{post.text}</p>
           </div>
-          <span className="text-[10px] text-gray-600 flex-shrink-0">{post.time}</span>
+          <span style={{ fontFamily: 'var(--font-mono)', fontSize: '0.6rem', color: 'var(--text-dim)', flexShrink: 0 }}>{post.time}</span>
         </div>
       ))}
     </div>
@@ -55,19 +67,21 @@ function CommunityFeed() {
 
 function AlphaSignals() {
   return (
-    <div className="space-y-2">
+    <div>
       {ALPHA_SIGNALS.map((sig, i) => (
-        <div key={i} className="flex items-center gap-3 py-2 border-b border-white/5 last:border-0">
-          <div className="flex-1 min-w-0">
-            <div className="flex items-center gap-2">
-              <span className="text-xs font-medium text-gray-200">{sig.label}</span>
-              <span className={cn("text-xs font-bold", sig.trend === 'up' ? 'text-emerald-400' : 'text-red-400')}>
-                {sig.value}
-              </span>
+        <div key={i} style={{
+          display: 'flex', alignItems: 'center', gap: '0.5rem',
+          padding: '0.6rem 0',
+          borderBottom: i < ALPHA_SIGNALS.length - 1 ? '1px solid var(--bg-border)' : 'none'
+        }}>
+          <div style={{ flex: 1, minWidth: 0 }}>
+            <div style={{ display: 'flex', alignItems: 'center', gap: '0.5rem' }}>
+              <span style={{ fontFamily: 'var(--font-mono)', fontSize: '0.72rem', color: 'var(--text)' }}>{sig.label}</span>
+              <span style={{ fontFamily: 'var(--font-mono)', fontSize: '0.72rem', fontWeight: 600, color: sig.trend === 'up' ? '#4be8a0' : '#e85b4b' }}>{sig.value}</span>
             </div>
-            <p className="text-[11px] text-gray-500 mt-0.5">{sig.note}</p>
+            <p style={{ fontFamily: 'var(--font-mono)', fontSize: '0.6rem', color: 'var(--text-dim)', marginTop: '0.15rem' }}>{sig.note}</p>
           </div>
-          <div className={cn("w-2 h-2 rounded-full flex-shrink-0", sig.trend === 'up' ? 'bg-emerald-400' : 'bg-red-400')} />
+          <div style={{ width: 6, height: 6, borderRadius: '50%', background: sig.trend === 'up' ? '#4be8a0' : '#e85b4b', flexShrink: 0 }} />
         </div>
       ))}
     </div>
@@ -76,16 +90,18 @@ function AlphaSignals() {
 
 function WhaleTracker() {
   return (
-    <div className="space-y-2">
+    <div>
       {WHALE_MOVES.map((move, i) => (
-        <div key={i} className="flex items-start gap-3 py-2 border-b border-white/5 last:border-0">
-          <div className="text-[10px] font-mono text-teal-400 pt-0.5 flex-shrink-0">{move.wallet}</div>
-          <div className="flex-1 min-w-0">
-            <p className="text-xs text-gray-300 leading-snug">{move.action}</p>
-          </div>
-          <div className="text-right flex-shrink-0">
-            <div className="text-xs font-bold text-teal-300">{move.value}</div>
-            <div className="text-[10px] text-gray-600">{move.time}</div>
+        <div key={i} style={{
+          display: 'flex', alignItems: 'flex-start', gap: '0.75rem',
+          padding: '0.6rem 0',
+          borderBottom: i < WHALE_MOVES.length - 1 ? '1px solid var(--bg-border)' : 'none'
+        }}>
+          <span style={{ fontFamily: 'var(--font-mono)', fontSize: '0.6rem', color: 'var(--accent)', paddingTop: '0.1rem', flexShrink: 0 }}>{move.wallet}</span>
+          <p style={{ flex: 1, fontSize: '0.78rem', color: 'var(--text-muted)', lineHeight: 1.4 }}>{move.action}</p>
+          <div style={{ textAlign: 'right', flexShrink: 0 }}>
+            <div style={{ fontFamily: 'var(--font-mono)', fontSize: '0.72rem', fontWeight: 600, color: 'var(--accent)' }}>{move.value}</div>
+            <div style={{ fontFamily: 'var(--font-mono)', fontSize: '0.58rem', color: 'var(--text-dim)' }}>{move.time}</div>
           </div>
         </div>
       ))}
@@ -95,17 +111,20 @@ function WhaleTracker() {
 
 function InnerCircle() {
   return (
-    <div className="space-y-3">
+    <div>
       {INNER_CIRCLE_POSTS.map((post, i) => (
-        <div key={i} className="p-3 rounded-lg bg-amber-500/5 border border-amber-500/10">
-          <div className="flex items-center gap-2 mb-1.5">
-            <span className="text-[11px] font-bold text-amber-400">@{post.user}</span>
-            <span className="text-[9px] uppercase tracking-widest text-amber-600 bg-amber-500/10 px-1.5 py-0.5 rounded">{post.role}</span>
+        <div key={i} style={{
+          padding: '0.75rem',
+          border: '1px solid var(--bg-border)',
+          borderLeft: '2px solid var(--accent)',
+          marginBottom: i < INNER_CIRCLE_POSTS.length - 1 ? '0.5rem' : 0
+        }}>
+          <div style={{ display: 'flex', alignItems: 'center', gap: '0.5rem', marginBottom: '0.4rem' }}>
+            <span style={{ fontFamily: 'var(--font-mono)', fontSize: '0.62rem', fontWeight: 600, color: 'var(--accent)' }}>@{post.user}</span>
+            <span style={{ fontFamily: 'var(--font-mono)', fontSize: '0.55rem', textTransform: 'uppercase', letterSpacing: '0.1em', color: 'var(--text-dim)', border: '1px solid var(--bg-border)', padding: '0.1rem 0.35rem' }}>{post.role}</span>
           </div>
-          <p className="text-xs text-gray-300 leading-relaxed">{post.text}</p>
-          <div className="mt-2 flex items-center gap-1">
-            <span className="text-[10px] text-gray-500">👍 {post.votes} upvotes</span>
-          </div>
+          <p style={{ fontSize: '0.78rem', color: 'var(--text-muted)', lineHeight: 1.5 }}>{post.text}</p>
+          <div style={{ marginTop: '0.4rem', fontFamily: 'var(--font-mono)', fontSize: '0.58rem', color: 'var(--text-dim)' }}>👍 {post.votes} upvotes</div>
         </div>
       ))}
     </div>
@@ -113,47 +132,19 @@ function InnerCircle() {
 }
 
 const SECTIONS = [
-  {
-    id: 'bronze',
-    title: 'Community Feed',
-    desc: 'Public discussion and news updates.',
-    icon: Users,
-    tier: 'bronze',
-    content: <CommunityFeed />,
-  },
-  {
-    id: 'silver',
-    title: 'Alpha Signals',
-    desc: 'Early warnings on market movements.',
-    icon: Zap,
-    tier: 'silver',
-    content: <AlphaSignals />,
-  },
-  {
-    id: 'gold',
-    title: 'Whale Tracker',
-    desc: 'Real-time monitoring of major wallet activity.',
-    icon: TrendingUp,
-    tier: 'gold',
-    content: <WhaleTracker />,
-  },
-  {
-    id: 'platinum',
-    title: 'Inner Circle',
-    desc: 'Exclusive private community and voting rights.',
-    icon: Crown,
-    tier: 'platinum',
-    content: <InnerCircle />,
-  },
+  { id: 'bronze', title: 'Community Feed', desc: 'Public discussion and news updates.', icon: Users, tier: 'bronze', content: <CommunityFeed /> },
+  { id: 'silver', title: 'Alpha Signals', desc: 'Early warnings on market movements.', icon: Zap, tier: 'silver', content: <AlphaSignals /> },
+  { id: 'gold', title: 'Whale Tracker', desc: 'Real-time monitoring of major wallet activity.', icon: TrendingUp, tier: 'gold', content: <WhaleTracker /> },
+  { id: 'platinum', title: 'Inner Circle', desc: 'Exclusive private community and voting rights.', icon: Crown, tier: 'platinum', content: <InnerCircle /> },
 ];
 
 export const GatedContent: React.FC<GatedContentProps> = ({ currentTier }) => {
   const currentTierIndex = TIER_HIERARCHY.indexOf(currentTier.toLowerCase());
 
   return (
-    <div className="space-y-6">
-      <h3 className="text-gray-400 text-sm font-medium uppercase tracking-wider">Unlocked Content</h3>
-      <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+    <div>
+      <div className={styles.title}>Unlocked Content</div>
+      <div className={styles.grid}>
         {SECTIONS.map((section, i) => {
           const sectionTierIndex = TIER_HIERARCHY.indexOf(section.tier);
           const isUnlocked = currentTierIndex >= sectionTierIndex;
@@ -161,52 +152,36 @@ export const GatedContent: React.FC<GatedContentProps> = ({ currentTier }) => {
           return (
             <motion.div
               key={section.id}
-              initial={{ opacity: 0, scale: 0.95 }}
-              animate={{ opacity: 1, scale: 1 }}
-              transition={{ delay: 0.6 + i * 0.1 }}
-              className={cn(
-                'relative overflow-hidden p-6 glass-card border-l-4',
-                isUnlocked ? 'border-l-violet-500' : 'border-l-gray-700 opacity-60 grayscale-[0.5]'
-              )}
+              className={`${styles.panel} ${isUnlocked ? styles.panelUnlocked : styles.panelLocked}`}
+              initial={{ opacity: 0, y: 10 }}
+              animate={{ opacity: isUnlocked ? 1 : 0.4, y: 0 }}
+              transition={{ delay: 0.4 + i * 0.08 }}
             >
-              {!isUnlocked && (
-                <div className="absolute top-4 right-4">
-                  <Lock className="w-4 h-4 text-gray-500" />
-                </div>
-              )}
-              {isUnlocked && (
-                <div className="absolute top-4 right-4">
-                  <Unlock className="w-4 h-4 text-violet-500" />
-                </div>
-              )}
+              <div className={styles.statusIcon}>
+                {isUnlocked
+                  ? <Unlock size={14} className={styles.unlockedIcon} />
+                  : <Lock size={14} className={styles.lockedIcon} />
+                }
+              </div>
 
-              <div className="flex items-center gap-4 mb-4">
-                <div
-                  className={cn(
-                    'p-3 rounded-xl',
-                    isUnlocked ? 'bg-violet-500/10 text-violet-500' : 'bg-white/5 text-gray-500'
-                  )}
-                >
-                  <section.icon className="w-6 h-6" />
+              <div className={styles.panelHead}>
+                <div className={isUnlocked ? styles.panelIconWrap : styles.panelIconWrapLocked}>
+                  <section.icon size={20} />
                 </div>
                 <div>
-                  <h4 className="font-bold">{section.title}</h4>
-                  <p className="text-[10px] uppercase text-gray-500">Requires {section.tier}+</p>
+                  <span className={styles.panelTitle}>{section.title}</span>
+                  <span className={styles.panelReq}>Requires {section.tier}+</span>
                 </div>
               </div>
 
-              <div className="relative min-h-[80px]">
-                {isUnlocked ? (
-                  <div>{section.content}</div>
-                ) : (
-                  <div className="space-y-2 blur-sm select-none pointer-events-none">
-                    <p className="text-sm text-gray-500">
-                      Locked content. Increase your reputation score to reveal.
-                    </p>
-                    <div className="h-20 bg-gray-900/50 rounded-lg flex items-center justify-center border border-white/5" />
-                  </div>
-                )}
-              </div>
+              {isUnlocked ? (
+                <div className={styles.content}>{section.content}</div>
+              ) : (
+                <div>
+                  <p className={styles.lockedContent}>Locked — increase your reputation to reveal.</p>
+                  <div className={styles.lockedPlaceholder} />
+                </div>
+              )}
             </motion.div>
           );
         })}
