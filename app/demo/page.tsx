@@ -10,7 +10,7 @@ import { GatedContent } from '@/components/GatedContent';
 import { ScoreBreakdown } from '@/components/ScoreBreakdown';
 import { FairScaleResponse } from '@/lib/types';
 import { motion, AnimatePresence } from 'framer-motion';
-import { FlaskConical, ChevronDown, CheckCircle, Code2, ExternalLink } from 'lucide-react';
+import { FlaskConical, ChevronDown, CheckCircle, Code2, ExternalLink, Terminal } from 'lucide-react';
 
 type TierKey = 'bronze' | 'silver' | 'gold' | 'platinum';
 
@@ -203,7 +203,7 @@ const JUDGE_CHECKLIST = [
 ];
 
 function JudgePanel() {
-  const [open, setOpen] = useState(false);
+  const [open, setOpen] = useState(true);
   return (
     <motion.div
       initial={{ opacity: 0, y: -8 }}
@@ -264,6 +264,45 @@ function JudgePanel() {
   );
 }
 
+function ApiResponseViewer({ data }: { data: FairScaleResponse }) {
+  const [open, setOpen] = useState(false);
+  const json = JSON.stringify(data, null, 2);
+  return (
+    <motion.div
+      initial={{ opacity: 0, y: -4 }}
+      animate={{ opacity: 1, y: 0 }}
+      transition={{ delay: 0.08 }}
+      className="mb-4 rounded-xl border border-emerald-500/20 bg-emerald-500/5 overflow-hidden"
+    >
+      <button
+        onClick={() => setOpen(o => !o)}
+        className="w-full flex items-center justify-between px-5 py-3 text-left hover:bg-emerald-500/5 transition-colors"
+      >
+        <div className="flex items-center gap-2">
+          <Terminal className="w-4 h-4 text-emerald-400 flex-shrink-0" />
+          <span className="text-sm font-semibold text-emerald-300">FairScale API Response</span>
+          <span className="text-[10px] text-emerald-600 bg-emerald-500/10 px-2 py-0.5 rounded-full font-mono">GET /api/score?wallet=…</span>
+        </div>
+        <ChevronDown className={`w-4 h-4 text-emerald-600 transition-transform ${open ? 'rotate-180' : ''}`} />
+      </button>
+      {open && (
+        <div className="border-t border-emerald-500/10">
+          <div className="px-5 py-3 flex items-center gap-3 text-xs text-gray-500 border-b border-white/5 bg-black/20">
+            <span className="text-emerald-400 font-mono font-bold">200 OK</span>
+            <span>·</span>
+            <span className="font-mono">Content-Type: application/json</span>
+            <span>·</span>
+            <span>FairScale API → Next.js proxy → client</span>
+          </div>
+          <pre className="px-5 py-4 text-xs text-emerald-300/80 font-mono overflow-x-auto leading-relaxed bg-black/30">
+            {json}
+          </pre>
+        </div>
+      )}
+    </motion.div>
+  );
+}
+
 export default function DemoPage() {
   const [activeTier, setActiveTier] = useState<TierKey>('gold');
   const [mounted, setMounted] = useState(false);
@@ -283,6 +322,9 @@ export default function DemoPage() {
       <main className="flex-grow pt-24 pb-20 px-6 max-w-7xl mx-auto w-full">
         {/* Judge Evaluation Panel */}
         <JudgePanel />
+
+        {/* API Response Viewer */}
+        <ApiResponseViewer data={data} />
 
         {/* Demo Banner */}
         <motion.div
