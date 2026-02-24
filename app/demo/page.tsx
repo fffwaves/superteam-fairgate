@@ -169,36 +169,44 @@ const TIER_LABELS: Record<TierKey, string> = {
   platinum: 'Platinum',
 };
 
+const REPO = 'https://github.com/fffwaves/superteam-fairgate/blob/main';
+
 const JUDGE_CHECKLIST = [
   {
     label: 'FairScale API Integration',
     detail: 'Server-side proxy at /api/score — fetches live score with fairkey header, preventing key exposure. Typed FairScaleResponse, 1-hour cache.',
     code: 'app/api/score/route.ts',
+    githubUrl: `${REPO}/app/api/score/route.ts`,
   },
   {
     label: 'Real-time FairScore Display',
     detail: 'Score reveal animation, tier badge (Bronze/Silver/Gold/Platinum), and live breakdown of fairscore_base vs social_score as animated progress bars.',
-    code: 'components/ScoreReveal.tsx + ScoreBreakdown.tsx',
+    code: 'components/ScoreReveal.tsx',
+    githubUrl: `${REPO}/components/ScoreReveal.tsx`,
   },
   {
     label: 'Reputation-Gated Content',
     detail: 'Four content tiers unlocked progressively: Community Feed (Bronze+), Alpha Signals (Silver+), Whale Tracker (Gold+), Inner Circle (Platinum). Locked sections blurred.',
     code: 'components/GatedContent.tsx',
+    githubUrl: `${REPO}/components/GatedContent.tsx`,
   },
   {
     label: 'On-Chain Badge System',
     detail: 'FairScale badge IDs (diamond_hands, defi_native, early_adopter, lst_staker) rendered with tier-colored icons and descriptions.',
     code: 'components/BadgeGrid.tsx',
+    githubUrl: `${REPO}/components/BadgeGrid.tsx`,
   },
   {
     label: 'Wallet Activity Stats',
     detail: 'Displays FairScale features: tx_count, active_days, wallet_age_days, native_sol_percentile, lst_percentile_score as visual stat cards.',
     code: 'components/StatsRow.tsx',
+    githubUrl: `${REPO}/components/StatsRow.tsx`,
   },
   {
     label: 'Mock Fallback + Error Handling',
     detail: 'Graceful mock data fallback when API key absent. Full error states for invalid wallet, rate limit, API down — no raw errors shown.',
-    code: 'app/api/score/route.ts + app/dashboard/page.tsx',
+    code: 'app/api/score/route.ts',
+    githubUrl: `${REPO}/app/api/score/route.ts`,
   },
 ];
 
@@ -233,10 +241,16 @@ function JudgePanel() {
               <div className="flex-1 min-w-0">
                 <div className="flex items-center gap-2 flex-wrap">
                   <span className="text-sm font-medium text-white/90">{item.label}</span>
-                  <div className="flex items-center gap-1 text-[10px] text-gray-500 bg-gray-900 px-2 py-0.5 rounded font-mono">
+                  <a
+                    href={item.githubUrl}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="flex items-center gap-1 text-[10px] text-gray-500 bg-gray-900 px-2 py-0.5 rounded font-mono hover:text-violet-400 hover:bg-violet-500/10 transition-colors"
+                  >
                     <Code2 className="w-2.5 h-2.5" />
                     {item.code}
-                  </div>
+                    <ExternalLink className="w-2 h-2 ml-0.5" />
+                  </a>
                 </div>
                 <p className="text-xs text-gray-400 mt-1 leading-relaxed">{item.detail}</p>
               </div>
