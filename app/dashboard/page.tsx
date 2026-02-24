@@ -11,7 +11,7 @@ import { StatsRow } from '@/components/StatsRow';
 import { GatedContent } from '@/components/GatedContent';
 import { ScoreBreakdown } from '@/components/ScoreBreakdown';
 import { FairScaleResponse } from '@/lib/types';
-import { AlertCircle, RefreshCw } from 'lucide-react';
+import { AlertCircle, RefreshCw, Copy, Check, ExternalLink } from 'lucide-react';
 import { motion } from 'framer-motion';
 import styles from './dashboard.module.css';
 
@@ -22,6 +22,15 @@ export default function Dashboard() {
   const [loading, setLoading] = useState(true);
   const [refreshing, setRefreshing] = useState(false);
   const [error, setError] = useState<string | null>(null);
+  const [copied, setCopied] = useState(false);
+
+  const copyWallet = () => {
+    if (!publicKey) return;
+    navigator.clipboard.writeText(publicKey.toBase58()).then(() => {
+      setCopied(true);
+      setTimeout(() => setCopied(false), 2000);
+    });
+  };
 
   const fetchData = React.useCallback(async (isRefresh = false) => {
     if (!connected || !publicKey) return;
@@ -85,9 +94,29 @@ export default function Dashboard() {
             <div className={styles.header}>
               <div>
                 <h1 className={styles.headerTitle}>Reputation Dashboard</h1>
-                <p className={styles.wallet}>
-                  {data.wallet.slice(0, 6)}...{data.wallet.slice(-6)}
-                </p>
+                <div className={styles.walletRow}>
+                  <p className={styles.wallet}>
+                    {data.wallet.slice(0, 6)}...{data.wallet.slice(-6)}
+                  </p>
+                  <button
+                    onClick={copyWallet}
+                    className={styles.copyBtn}
+                    title="Copy wallet address"
+                  >
+                    {copied ? <Check size={11} /> : <Copy size={11} />}
+                    {copied ? 'Copied' : 'Copy'}
+                  </button>
+                  <a
+                    href="https://app.fairscale.xyz"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className={styles.fairscaleLink}
+                    title="View on FairScale"
+                  >
+                    <ExternalLink size={11} />
+                    FairScale
+                  </a>
+                </div>
               </div>
               <div className={styles.headerRight}>
                 <div className={styles.timestampWrap}>
