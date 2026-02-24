@@ -12,7 +12,7 @@ FairGate is a production-ready reputation gateway built for the Solana ecosystem
 | **Wallet-free Demo** | [superteam-fairgate.vercel.app/demo](https://superteam-fairgate.vercel.app/demo) |
 | **Repo** | [github.com/fffwaves/superteam-fairgate](https://github.com/fffwaves/superteam-fairgate) |
 
-> **🎯 For judges:** Go to [/demo](https://superteam-fairgate.vercel.app/demo) to explore the full dashboard UI — no wallet needed. Use the tier switcher to preview Bronze / Silver / Gold / Platinum experiences.
+> **🎯 For judges:** Go to [/demo](https://superteam-fairgate.vercel.app/demo) to explore the full dashboard UI — no wallet needed. Use the tier switcher to preview Bronze / Silver / Gold / Platinum experiences. The **Quick Tour** panel (~2 min) walks you through all 6 FairScale integration points, the API response viewer, and gated content tiers.
 
 ![FairGate Dashboard](public/screenshot.png)
 

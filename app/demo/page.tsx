@@ -10,7 +10,7 @@ import { GatedContent } from '@/components/GatedContent';
 import { ScoreBreakdown } from '@/components/ScoreBreakdown';
 import { FairScaleResponse } from '@/lib/types';
 import { motion, AnimatePresence } from 'framer-motion';
-import { FlaskConical, ChevronDown, CheckCircle, Code2, ExternalLink, Terminal } from 'lucide-react';
+import { FlaskConical, ChevronDown, CheckCircle, Code2, ExternalLink, Terminal, Map } from 'lucide-react';
 
 type TierKey = 'bronze' | 'silver' | 'gold' | 'platinum';
 
@@ -210,6 +210,80 @@ const JUDGE_CHECKLIST = [
   },
 ];
 
+const TOUR_STEPS = [
+  {
+    step: '1',
+    title: 'Try the Tier Switcher',
+    desc: 'Click Bronze → Silver → Gold → Platinum buttons below. Watch the score ring, tier badge, gated content locks, and badge grid all update live.',
+    color: '#ffd700',
+  },
+  {
+    step: '2',
+    title: 'Expand API Response Viewer',
+    desc: 'Open the green "FairScale API Response" panel ↓ to see the exact JSON the API returns — all 6 fields surfaced in the UI: fairscore, fairscore_base, social_score, tier, badges, features.',
+    color: '#34d399',
+  },
+  {
+    step: '3',
+    title: 'Review Integration Points',
+    desc: 'Open the purple "Judge\'s Evaluation Guide" panel ↓ to verify each of the 6 FairScale integration points with direct GitHub source links.',
+    color: '#a78bfa',
+  },
+  {
+    step: '4',
+    title: 'Check Gated Content',
+    desc: 'Scroll to the bottom — at Bronze, 3 sections are blurred/locked. At Platinum, all 4 are unlocked (Community Feed, Alpha Signals, Whale Tracker, Inner Circle).',
+    color: '#fb923c',
+  },
+];
+
+function QuickTour() {
+  const [open, setOpen] = useState(false);
+  return (
+    <motion.div
+      initial={{ opacity: 0, y: -8 }}
+      animate={{ opacity: 1, y: 0 }}
+      transition={{ delay: 0.02 }}
+      className="mb-4 rounded-xl border border-amber-500/20 bg-amber-500/5 overflow-hidden"
+    >
+      <button
+        onClick={() => setOpen(o => !o)}
+        className="w-full flex items-center justify-between px-5 py-3 text-left hover:bg-amber-500/5 transition-colors"
+      >
+        <div className="flex items-center gap-2">
+          <Map className="w-4 h-4 text-amber-400 flex-shrink-0" />
+          <span className="text-sm font-semibold text-amber-300">Quick Tour — 4 Things to Verify</span>
+          <span className="text-[10px] text-amber-600 bg-amber-500/10 px-2 py-0.5 rounded-full">~2 min</span>
+        </div>
+        <ChevronDown className={`w-4 h-4 text-amber-500 transition-transform ${open ? 'rotate-180' : ''}`} />
+      </button>
+      {open && (
+        <div className="px-5 pb-5 border-t border-amber-500/10 pt-4">
+          <p className="text-xs text-gray-400 mb-4">
+            No wallet needed. Follow these steps to verify FairScale integration in ~2 minutes.
+          </p>
+          <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
+            {TOUR_STEPS.map((item, i) => (
+              <div key={i} className="flex gap-3 p-3 rounded-lg bg-white/[0.02] border border-white/5">
+                <div
+                  className="w-6 h-6 rounded-full flex items-center justify-center text-[10px] font-bold flex-shrink-0 mt-0.5"
+                  style={{ background: `${item.color}20`, color: item.color, border: `1px solid ${item.color}40` }}
+                >
+                  {item.step}
+                </div>
+                <div>
+                  <p className="text-sm font-medium text-white/90 mb-1">{item.title}</p>
+                  <p className="text-xs text-gray-400 leading-relaxed">{item.desc}</p>
+                </div>
+              </div>
+            ))}
+          </div>
+        </div>
+      )}
+    </motion.div>
+  );
+}
+
 function JudgePanel() {
   const [open, setOpen] = useState(true);
   return (
@@ -334,6 +408,9 @@ export default function DemoPage() {
       <Navbar />
 
       <main className="flex-grow pt-24 pb-20 px-6 max-w-7xl mx-auto w-full">
+        {/* Quick Tour for judges */}
+        <QuickTour />
+
         {/* Judge Evaluation Panel */}
         <JudgePanel />
 

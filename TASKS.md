@@ -24,7 +24,7 @@
 - [x] API Response Viewer on /demo — shows raw FairScale JSON for active tier, proves data model fidelity ✅ (Feb 24)
 - [x] Clickable GitHub source links on each judge checklist item — judges can jump straight to code ✅ (Feb 24)
 - [x] Submission copy updated to reflect all post-Feb-21 features ✅ (Feb 24)
-- [ ] Add demo video / screen recording for submission
+- [x] Add "Quick Tour" guided walkthrough panel on /demo — 4-step judge guide replaces video ✅ (Feb 24)
 - [x] README overhaul for judges — cleaner structure, project tree, FairScale integration details ✅ (Feb 23)
 - [ ] Add Xverse wallet support (BTC-first wallet, no Solana adapter available)
 - [x] Add /demo page — judges can explore full dashboard UI without connecting a wallet ✅ (Feb 23)
