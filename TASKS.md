@@ -26,6 +26,7 @@
 - [x] Submission copy updated to reflect all post-Feb-21 features ✅ (Feb 24)
 - [x] Add "Quick Tour" guided walkthrough panel on /demo — 4-step judge guide replaces video ✅ (Feb 24)
 - [x] README overhaul for judges — cleaner structure, project tree, FairScale integration details ✅ (Feb 23)
+- [x] Copy wallet address button + FairScale external link on dashboard header ✅ (Feb 24)
 - [ ] Add Xverse wallet support (BTC-first wallet, no Solana adapter available)
 - [x] Add /demo page — judges can explore full dashboard UI without connecting a wallet ✅ (Feb 23)
 - [x] Tier switcher on /demo — judges can toggle Bronze/Silver/Gold/Platinum to see gating in action ✅ (Feb 23)

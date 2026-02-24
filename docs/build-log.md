@@ -1,5 +1,26 @@
 # FairGate Build Log
 
+## 2026-02-24 (18:04 UTC — Autonomous session)
+
+**Session type:** Cron autonomous work (18:00)
+
+**Status check:**
+- TASKS.md: only remaining actionable TODO is manual Superteam Earn submission (human action required)
+- All code features complete; deadline Mar 1 2026 (5 days remaining)
+- Build verified clean (8/8 static pages, no type errors)
+
+**Work done:**
+- ✅ Dashboard polish: added **Copy Wallet Address** button (clipboard, with ✓ confirmation state)
+- ✅ Dashboard polish: added **View on FairScale** external link (opens app.fairscale.xyz) — amber accent style
+- Both additions are in the dashboard header wallet row, matching existing mono/uppercase design language
+- Pushed to main: `7632c42`
+
+**Remaining TODOs (require human):**
+- ⚠️ **URGENT (5 days left):** Submit on Superteam Earn before Mar 1 — see docs/submission.md
+  URL: https://earn.superteam.fun/listings/fairathon/
+
+---
+
 ## 2026-02-23 (18:03 UTC — Autonomous session)
 
 **Session type:** Cron autonomous work (18:00)
