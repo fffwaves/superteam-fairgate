@@ -22,6 +22,7 @@
 - [x] Judge's Evaluation Panel on /demo — collapsible checklist of 6 FairScale integration points with source file refs ✅ (Feb 23)
 - [x] JudgePanel open by default on /demo — no discovery needed ✅ (Feb 24)
 - [x] API Response Viewer on /demo — shows raw FairScale JSON for active tier, proves data model fidelity ✅ (Feb 24)
+- [x] Clickable GitHub source links on each judge checklist item — judges can jump straight to code ✅ (Feb 24)
 - [x] Submission copy updated to reflect all post-Feb-21 features ✅ (Feb 24)
 - [ ] Add demo video / screen recording for submission
 - [x] README overhaul for judges — cleaner structure, project tree, FairScale integration details ✅ (Feb 23)
