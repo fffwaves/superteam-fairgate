@@ -52,7 +52,7 @@ FairGate is a production-ready reputation gateway built on Solana, powered by Fa
 - [x] README with screenshots and FairScale integration breakdown
 - [x] Mobile responsive
 - [x] Judge's Evaluation Guide on /demo
-- [ ] **MANUAL ACTION REQUIRED:** Go to https://earn.superteam.fun/listings/fairathon/ → click "Submit Now" → paste the description above + add live URL + repo link
+- [ ] **MANUAL ACTION REQUIRED:** Go to https://superteam.fun/earn/listing/fairathon/ → click "Submit Now" → paste the description above + add live URL + repo link
 - [x] Quick Tour panel on /demo replaces need for video — guided 4-step walkthrough for judges ✅ (Feb 24)
 
 ---

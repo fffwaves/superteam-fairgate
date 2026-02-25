@@ -15,7 +15,7 @@
 ### Submission
 - [x] Manual browser QA — connect wallet, verify score fetch + tier display ✅
 - [x] Screenshot the live app for README ✅
-- [ ] **HUMAN ACTION REQUIRED:** Submit on Superteam Earn: https://earn.superteam.fun/listings/fairathon/ — see docs/submission.md for copy-paste text
+- [ ] **HUMAN ACTION REQUIRED:** Submit on Superteam Earn: https://superteam.fun/earn/listing/fairathon/ — see docs/submission.md for copy-paste text
 - [x] Make repo public before submitting ✅ (already public)
 
 ### Optional polish (if time allows)
