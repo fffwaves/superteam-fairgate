@@ -10,7 +10,7 @@ import { GatedContent } from '@/components/GatedContent';
 import { ScoreBreakdown } from '@/components/ScoreBreakdown';
 import { FairScaleResponse } from '@/lib/types';
 import { motion, AnimatePresence } from 'framer-motion';
-import { FlaskConical, ChevronDown, CheckCircle, Code2, ExternalLink, Terminal, Map } from 'lucide-react';
+import { ChevronDown, CheckCircle, Code2, ExternalLink, Terminal, Map } from 'lucide-react';
 
 type TierKey = 'bronze' | 'silver' | 'gold' | 'platinum';
 
@@ -285,7 +285,7 @@ function QuickTour() {
 }
 
 function JudgePanel() {
-  const [open, setOpen] = useState(true);
+  const [open, setOpen] = useState(false);
   return (
     <motion.div
       initial={{ opacity: 0, y: -8 }}
@@ -405,57 +405,9 @@ export default function DemoPage() {
 
   return (
     <div className="flex flex-col min-h-screen">
-      <Navbar />
+      <Navbar demoMode activeTier={activeTier} onTierChange={(t) => setActiveTier(t as TierKey)} />
 
-      <main className="flex-grow pt-24 pb-20 px-6 max-w-7xl mx-auto w-full">
-        {/* Quick Tour for judges */}
-        <QuickTour />
-
-        {/* Judge Evaluation Panel */}
-        <JudgePanel />
-
-        {/* API Response Viewer */}
-        <ApiResponseViewer data={data} />
-
-        {/* Demo Banner */}
-        <motion.div
-          initial={{ opacity: 0, y: -8 }}
-          animate={{ opacity: 1, y: 0 }}
-          className="mb-6 flex items-center gap-3 px-5 py-3 rounded-xl bg-amber-500/10 border border-amber-500/20 text-amber-400 text-sm"
-        >
-          <FlaskConical className="w-4 h-4 flex-shrink-0" />
-          <span>
-            <strong>Demo Mode</strong> — Explore each reputation tier below. Connect your Solana wallet on the{' '}
-            <a href="/" className="underline underline-offset-2 hover:text-amber-300 transition-colors">
-              home page
-            </a>{' '}
-            to see your real FairScore.
-          </span>
-        </motion.div>
-
-        {/* Tier Switcher */}
-        <motion.div
-          initial={{ opacity: 0, y: 8 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ delay: 0.1 }}
-          className="mb-8 flex items-center gap-2"
-        >
-          <span className="text-xs text-gray-500 uppercase tracking-widest mr-2">Preview tier:</span>
-          {(Object.keys(TIER_PRESETS) as TierKey[]).map((tier) => (
-            <button
-              key={tier}
-              onClick={() => setActiveTier(tier)}
-              className="px-4 py-1.5 rounded-full text-xs font-bold tracking-wide border transition-all duration-200"
-              style={{
-                borderColor: activeTier === tier ? TIER_COLORS[tier] : 'rgba(255,255,255,0.1)',
-                color: activeTier === tier ? TIER_COLORS[tier] : '#6b7280',
-                background: activeTier === tier ? `${TIER_COLORS[tier]}18` : 'transparent',
-              }}
-            >
-              {TIER_LABELS[tier]}
-            </button>
-          ))}
-        </motion.div>
+      <main className="flex-grow pb-20 w-full" style={{ paddingTop: '9rem', paddingLeft: '1.5rem', paddingRight: '1.5rem', maxWidth: '1280px', margin: '0 auto' }}>
 
         <AnimatePresence mode="wait">
           <motion.div
@@ -483,11 +435,11 @@ export default function DemoPage() {
             </div>
 
             {/* Top row: Score + Tier info */}
-            <div className="grid grid-cols-1 lg:grid-cols-3 gap-8">
+            <div className="grid grid-cols-1 lg:grid-cols-3 gap-8 items-start">
               <div className="lg:col-span-1">
                 <ScoreReveal score={data.fairscore} tier={data.tier} />
               </div>
-              <div className="lg:col-span-2 space-y-8">
+              <div className="lg:col-span-2 flex flex-col gap-8">
                 <TierCard currentTier={data.tier} score={data.fairscore} />
                 <ScoreBreakdown
                   fairscoreBase={data.fairscore_base}
@@ -505,6 +457,13 @@ export default function DemoPage() {
             <GatedContent currentTier={data.tier} />
           </motion.div>
         </AnimatePresence>
+
+        {/* Judge / Dev panels — collapsed by default, below the demo */}
+        <div className="mt-16 space-y-4">
+          <QuickTour />
+          <JudgePanel />
+          <ApiResponseViewer data={data} />
+        </div>
       </main>
 
       <footer className="py-10 border-t border-white/5 text-center text-gray-500 text-sm">

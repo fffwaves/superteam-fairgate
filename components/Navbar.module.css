@@ -8,6 +8,75 @@
   border-bottom: 1px solid var(--bg-border);
 }
 
+.demoBar {
+  border-top: 1px solid rgba(245, 158, 11, 0.15);
+  background: rgba(245, 158, 11, 0.04);
+}
+
+.demoInner {
+  max-width: 1280px;
+  margin: 0 auto;
+  padding: 0.4rem 1.5rem;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 0.5rem;
+  flex-wrap: nowrap;
+  overflow-x: auto;
+}
+
+.demoWarning {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  font-size: 0.75rem;
+  color: #f59e0b;
+}
+
+.demoIcon {
+  width: 14px;
+  height: 14px;
+  flex-shrink: 0;
+}
+
+.demoLink {
+  text-decoration: underline;
+  text-underline-offset: 2px;
+  color: inherit;
+  transition: opacity 0.15s;
+}
+
+.demoLink:hover {
+  opacity: 0.75;
+}
+
+.tierSwitcher {
+  display: flex;
+  align-items: center;
+  gap: 0.4rem;
+}
+
+.tierLabel {
+  font-family: var(--font-mono);
+  font-size: 0.58rem;
+  text-transform: uppercase;
+  letter-spacing: 0.12em;
+  color: #6b7280;
+  margin-right: 0.4rem;
+}
+
+.tierBtn {
+  padding: 0.3rem 0.9rem;
+  border-radius: 9999px;
+  font-size: 0.68rem;
+  font-weight: 700;
+  letter-spacing: 0.04em;
+  border: 1px solid;
+  cursor: pointer;
+  transition: all 0.15s;
+  font-family: var(--font-mono);
+}
+
 .inner {
   max-width: 1280px;
   margin: 0 auto;

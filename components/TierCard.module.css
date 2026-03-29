@@ -1,7 +1,6 @@
 .wrap {
   border: 1px solid var(--bg-border);
   padding: 1.5rem;
-  height: 100%;
   display: flex;
   flex-direction: column;
   justify-content: space-between;
